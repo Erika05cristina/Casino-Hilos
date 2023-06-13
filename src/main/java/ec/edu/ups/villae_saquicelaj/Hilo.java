@@ -4,6 +4,12 @@
  */
 package ec.edu.ups.villae_saquicelaj;
 
+import java.awt.Image;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -12,12 +18,32 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Hilo extends javax.swing.JFrame {
 
+    String imgs[] = {"7.jpg", "casa.jpg", "limon.png", "sandia.png"};
+    Icon imgsIco[] = new Icon[4];
+    HiloC1 hc1;
+
+    JLabel col1A;
+    JLabel col1B;
+    JLabel col1C;
+    JLabel col1D;
+
+    JLabel col2A;
+    JLabel col2B;
+    JLabel col2C;
+    JLabel col2D;
+
+    JLabel col3A;
+    JLabel col3B;
+    JLabel col3C;
+    JLabel col3D;
+
     /**
      * Creates new form Hilo
      */
     public Hilo() {
         initComponents();
         PropiedadesTabla();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -50,13 +76,29 @@ public class Hilo extends javax.swing.JFrame {
 
         jLabel1.setText("TIEMPOS");
 
+        txtCol1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCol1ActionPerformed(evt);
+            }
+        });
+
         btnIn1.setText("INICIAR");
+        btnIn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIn1ActionPerformed(evt);
+            }
+        });
 
         btnIn2.setText("INICIAR");
 
         btnIn3.setText("INICIAR");
 
         btnPa1.setText("PARAR");
+        btnPa1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPa1ActionPerformed(evt);
+            }
+        });
 
         btnPa2.setText("PARAR");
 
@@ -100,7 +142,6 @@ public class Hilo extends javax.swing.JFrame {
                         .addComponent(jLabel2)))
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtCol1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(44, 44, 44)
@@ -121,21 +162,22 @@ public class Hilo extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnPaTodo)
                             .addComponent(btnIn3)
-                            .addComponent(btnPa3))))
-                .addContainerGap(226, Short.MAX_VALUE))
+                            .addComponent(btnPa3)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtCol1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCol2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCol3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
+                .addGap(21, 21, 21)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnIn1)
                     .addComponent(btnIn2)
@@ -151,7 +193,7 @@ public class Hilo extends javax.swing.JFrame {
                     .addComponent(btnInTodo)
                     .addComponent(txtTiempoTodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -160,6 +202,21 @@ public class Hilo extends javax.swing.JFrame {
     private void btnPaTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPaTodoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnPaTodoActionPerformed
+
+    private void btnIn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIn1ActionPerformed
+        int tiempo = Integer.valueOf(this.txtCol1.getText());
+        hc1 = new HiloC1(tiempo);
+        hc1.start();
+    }//GEN-LAST:event_btnIn1ActionPerformed
+
+    private void txtCol1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCol1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCol1ActionPerformed
+
+    private void btnPa1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPa1ActionPerformed
+        hc1.setGirar(false);
+        hc1.stop();
+    }//GEN-LAST:event_btnPa1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -197,10 +254,142 @@ public class Hilo extends javax.swing.JFrame {
     }
 
     private void PropiedadesTabla() {
+        jTable1.setDefaultRenderer(Object.class, new ImgTabla());
 
         String titulos[] = {"Col 1", "Col 2", "Col 3"};
         DefaultTableModel tm = new DefaultTableModel(null, titulos);
         jTable1.setModel(tm);
+
+        col1A = new JLabel();
+        col1B = new JLabel();
+        col1C = new JLabel();
+        col1D = new JLabel();
+
+        col2A = new JLabel();
+        col2B = new JLabel();
+        col2C = new JLabel();
+        col2D = new JLabel();
+
+        col3A = new JLabel();
+        col3B = new JLabel();
+        col3C = new JLabel();
+        col3D = new JLabel();
+
+        // IMG 7
+        ImageIcon icono1 = new ImageIcon(imgs[0]);
+        Icon img1 = new ImageIcon(icono1.getImage().getScaledInstance(38, 55, Image.SCALE_DEFAULT));
+
+        //IMG CASA
+        ImageIcon icono2 = new ImageIcon(imgs[1]);
+        Icon img2 = new ImageIcon(icono2.getImage().getScaledInstance(58, 55, Image.SCALE_DEFAULT));
+
+        //IMG LIMON
+        ImageIcon icono3 = new ImageIcon(imgs[2]);
+        Icon img3 = new ImageIcon(icono3.getImage().getScaledInstance(68, 55, Image.SCALE_DEFAULT));
+
+        //IMG SANDIA
+        ImageIcon icono4 = new ImageIcon(imgs[3]);
+        Icon img4 = new ImageIcon(icono4.getImage().getScaledInstance(68, 55, Image.SCALE_DEFAULT));
+
+        imgsIco[0] = img1;
+        imgsIco[1] = img2;
+        imgsIco[2] = img3;
+        imgsIco[3] = img4;
+
+        col1A.setIcon(imgsIco[0]);
+        col2A.setIcon(imgsIco[2]);
+        col3A.setIcon(imgsIco[1]);
+
+        col1B.setIcon(imgsIco[2]);
+        col2B.setIcon(imgsIco[1]);
+        col3B.setIcon(imgsIco[0]);
+
+        col1C.setIcon(imgsIco[3]);
+        col2C.setIcon(imgsIco[0]);
+        col3C.setIcon(imgsIco[1]);
+
+        col1D.setIcon(imgsIco[0]);
+        col2D.setIcon(imgsIco[3]);
+        col3D.setIcon(imgsIco[2]);
+
+        tm.addRow(new Object[]{col1A, col2A, col3A});
+        tm.addRow(new Object[]{col1B, col2B, col3B});
+        tm.addRow(new Object[]{col1C, col2C, col3C});
+        tm.addRow(new Object[]{col1D, col2D, col3D});
+
+        this.jTable1.setRowHeight(55);
+
+    }
+
+    
+    
+    
+    public class HiloC1 extends Thread {
+
+        private int tiempo;
+        private int p = 0;
+        private boolean girar = true;
+        
+
+        public HiloC1(int tiempo) {
+            this.tiempo = tiempo;
+        }
+
+        @Override
+        public void run() {
+            while (girar) {
+                try {
+                    Thread.sleep(tiempo);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Hilo.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                System.out.println("Tiempo: " + tiempo);
+                switch (p) {
+                    case 0:
+                        col1A.setIcon(imgsIco[p]);
+                        col1B.setIcon(imgsIco[p + 2]);
+                        col1C.setIcon(imgsIco[p + 3]);
+                        col1D.setIcon(imgsIco[p]);
+                        
+                        
+                        
+                        
+                        break;
+
+                    case 1:
+                        col1A.setIcon(imgsIco[p]);
+                        col1B.setIcon(imgsIco[p + 2]);
+                        col1C.setIcon(imgsIco[p - 1]);
+                        col1D.setIcon(imgsIco[p]);
+
+                        break;
+                    case 2:
+                        col1A.setIcon(imgsIco[p]);
+                        col1B.setIcon(imgsIco[p - 2]);
+                        col1C.setIcon(imgsIco[p - 1]);
+                        col1D.setIcon(imgsIco[p]);
+                        
+                        break;
+                    case 3:
+                        col1A.setIcon(imgsIco[p]);
+                        col1B.setIcon(imgsIco[p - 2]);
+                        col1C.setIcon(imgsIco[p - 1]);
+                        col1D.setIcon(imgsIco[p]);
+                    case 4:
+                        p = 0;
+                }
+
+                p++;
+
+            }
+
+        }
+
+        public void setGirar(boolean girar) {
+            this.girar = girar;
+        }
+        
+        
 
     }
 

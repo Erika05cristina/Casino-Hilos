@@ -5,6 +5,7 @@
 package ec.edu.ups.villae_saquicelaj;
 
 import java.awt.Component;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
@@ -15,12 +16,13 @@ import javax.swing.table.DefaultTableCellRenderer;
 public class ImgTabla extends DefaultTableCellRenderer{
 
     @Override
-    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+    public Component getTableCellRendererComponent(JTable table, Object o, boolean isSelected, boolean hasFocus, int row, int column) {
         
-        if (hasFocus) {
-            
+        if (o instanceof JLabel) {
+            JLabel lb1 = (JLabel)o;
+            return lb1;
         }
-        return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+        return super.getTableCellRendererComponent(table, o, isSelected, hasFocus, row, column);
         
     }
 
