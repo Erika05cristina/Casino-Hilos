@@ -291,10 +291,10 @@ public class Hilo extends javax.swing.JFrame {
         ImageIcon icono4 = new ImageIcon(imgs[3]);
         Icon img4 = new ImageIcon(icono4.getImage().getScaledInstance(68, 55, Image.SCALE_DEFAULT));
 
-        imgsIco[0] = img1;
-        imgsIco[1] = img2;
-        imgsIco[2] = img3;
-        imgsIco[3] = img4;
+        imgsIco[0] = img1; //7
+        imgsIco[1] = img2; // casa
+        imgsIco[2] = img3; // limon
+        imgsIco[3] = img4; // sandia
 
         col1A.setIcon(imgsIco[0]);
         col2A.setIcon(imgsIco[2]);
@@ -306,11 +306,11 @@ public class Hilo extends javax.swing.JFrame {
 
         col1C.setIcon(imgsIco[3]);
         col2C.setIcon(imgsIco[0]);
-        col3C.setIcon(imgsIco[1]);
+        col3C.setIcon(imgsIco[2]);
 
-        col1D.setIcon(imgsIco[0]);
+        col1D.setIcon(imgsIco[1]);
         col2D.setIcon(imgsIco[3]);
-        col3D.setIcon(imgsIco[2]);
+        col3D.setIcon(imgsIco[3]);
 
         tm.addRow(new Object[]{col1A, col2A, col3A});
         tm.addRow(new Object[]{col1B, col2B, col3B});
@@ -321,15 +321,11 @@ public class Hilo extends javax.swing.JFrame {
 
     }
 
-    
-    
-    
     public class HiloC1 extends Thread {
 
         private int tiempo;
-        private int p = 0;
+        private int p = 0; //posicion
         private boolean girar = true;
-        
 
         public HiloC1(int tiempo) {
             this.tiempo = tiempo;
@@ -343,43 +339,12 @@ public class Hilo extends javax.swing.JFrame {
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Hilo.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                System.out.println("Tiempo: " + tiempo);
-                switch (p) {
-                    case 0:
-                        col1A.setIcon(imgsIco[p]);
-                        col1B.setIcon(imgsIco[p + 2]);
-                        col1C.setIcon(imgsIco[p + 3]);
-                        col1D.setIcon(imgsIco[p]);
-                        
-                        
-                        
-                        
-                        break;
-
-                    case 1:
-                        col1A.setIcon(imgsIco[p]);
-                        col1B.setIcon(imgsIco[p + 2]);
-                        col1C.setIcon(imgsIco[p - 1]);
-                        col1D.setIcon(imgsIco[p]);
-
-                        break;
-                    case 2:
-                        col1A.setIcon(imgsIco[p]);
-                        col1B.setIcon(imgsIco[p - 2]);
-                        col1C.setIcon(imgsIco[p - 1]);
-                        col1D.setIcon(imgsIco[p]);
-                        
-                        break;
-                    case 3:
-                        col1A.setIcon(imgsIco[p]);
-                        col1B.setIcon(imgsIco[p - 2]);
-                        col1C.setIcon(imgsIco[p - 1]);
-                        col1D.setIcon(imgsIco[p]);
-                    case 4:
-                        p = 0;
-                }
-
+               // System.out.println("Tiempo: " + tiempo);
+                actualizarC1(col1A, col1B, col1C, col1D, p);
                 p++;
+                if (p == 4) {
+                    p = 0;
+                }
 
             }
 
@@ -388,10 +353,40 @@ public class Hilo extends javax.swing.JFrame {
         public void setGirar(boolean girar) {
             this.girar = girar;
         }
-        
-        
 
     }
+
+    public void actualizarC1(JLabel lbA, JLabel lbB, JLabel lbC, JLabel lbD, int p) {
+        switch (p) {
+            case 0:
+                lbA.setIcon(imgsIco[p]);
+                lbB.setIcon(imgsIco[p + 2]);
+                lbC.setIcon(imgsIco[p + 3]);
+                lbD.setIcon(imgsIco[p + 1]);
+                break;
+            case 1:
+                lbA.setIcon(imgsIco[p ]);
+                lbB.setIcon(imgsIco[p -1]);
+                lbC.setIcon(imgsIco[p + 1]);
+                lbD.setIcon(imgsIco[p + 2]);
+                break;
+            case 2:
+                lbA.setIcon(imgsIco[p+1]);
+                lbB.setIcon(imgsIco[p - 1]);
+                lbC.setIcon(imgsIco[p - 2]);
+                lbD.setIcon(imgsIco[p]);
+                break;
+            case 3:
+                lbA.setIcon(imgsIco[p - 1]);
+                lbB.setIcon(imgsIco[p]);
+                lbC.setIcon(imgsIco[p - 2]);
+                lbD.setIcon(imgsIco[p -3 ]);
+                break;
+
+        }
+        this.repaint();
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIn1;
