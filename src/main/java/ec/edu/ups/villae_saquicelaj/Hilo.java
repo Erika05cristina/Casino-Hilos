@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,6 +22,9 @@ public class Hilo extends javax.swing.JFrame {
     String imgs[] = {"7.jpg", "casa.jpg", "limon.png", "sandia.png"};
     Icon imgsIco[] = new Icon[4];
     HiloC1 hc1;
+    HiloC2 hc2;
+    HiloC3 hc3;
+    HiloTodo hcT;
 
     JLabel col1A;
     JLabel col1B;
@@ -90,8 +94,18 @@ public class Hilo extends javax.swing.JFrame {
         });
 
         btnIn2.setText("INICIAR");
+        btnIn2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIn2ActionPerformed(evt);
+            }
+        });
 
         btnIn3.setText("INICIAR");
+        btnIn3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIn3ActionPerformed(evt);
+            }
+        });
 
         btnPa1.setText("PARAR");
         btnPa1.addActionListener(new java.awt.event.ActionListener() {
@@ -101,8 +115,18 @@ public class Hilo extends javax.swing.JFrame {
         });
 
         btnPa2.setText("PARAR");
+        btnPa2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPa2ActionPerformed(evt);
+            }
+        });
 
         btnPa3.setText("PARAR");
+        btnPa3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPa3ActionPerformed(evt);
+            }
+        });
 
         btnPaTodo.setText("PARAR TODO");
         btnPaTodo.addActionListener(new java.awt.event.ActionListener() {
@@ -112,6 +136,11 @@ public class Hilo extends javax.swing.JFrame {
         });
 
         btnInTodo.setText("INICIAR TODO");
+        btnInTodo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInTodoActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("TIEMPO PARA TODOS:");
 
@@ -200,13 +229,17 @@ public class Hilo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPaTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPaTodoActionPerformed
-        // TODO add your handling code here:
+        hcT.setGirar(false);
+        hcT.stop();
+        JOptionPane.showMessageDialog(null, "GANASTE!");
+
     }//GEN-LAST:event_btnPaTodoActionPerformed
 
     private void btnIn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIn1ActionPerformed
         int tiempo = Integer.valueOf(this.txtCol1.getText());
         hc1 = new HiloC1(tiempo);
         hc1.start();
+    
     }//GEN-LAST:event_btnIn1ActionPerformed
 
     private void txtCol1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCol1ActionPerformed
@@ -216,7 +249,48 @@ public class Hilo extends javax.swing.JFrame {
     private void btnPa1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPa1ActionPerformed
         hc1.setGirar(false);
         hc1.stop();
+   
     }//GEN-LAST:event_btnPa1ActionPerformed
+
+    private void btnIn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIn2ActionPerformed
+        int tiempo = Integer.valueOf(this.txtCol2.getText());
+        hc2 = new HiloC2(tiempo);
+        hc2.start();
+     
+    }//GEN-LAST:event_btnIn2ActionPerformed
+
+    private void btnPa2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPa2ActionPerformed
+        hc2.setGirar(false);
+        hc2.stop();
+        if (hc1.p==hc2.p) {
+            if (hc2.p==hc3.p) {
+                JOptionPane.showMessageDialog(null, "GANASTE!");
+            }
+        }
+    }//GEN-LAST:event_btnPa2ActionPerformed
+
+    private void btnIn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIn3ActionPerformed
+        int tiempo = Integer.valueOf(this.txtCol3.getText());
+        hc3 = new HiloC3(tiempo);
+        hc3.start();
+    
+    }//GEN-LAST:event_btnIn3ActionPerformed
+
+    private void btnPa3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPa3ActionPerformed
+        hc3.setGirar(false);
+        hc3.stop();
+      if (hc1.p==hc2.p) {
+            if (hc2.p==hc3.p) {
+                JOptionPane.showMessageDialog(null, "GANASTE!");
+            }
+        }
+    }//GEN-LAST:event_btnPa3ActionPerformed
+
+    private void btnInTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInTodoActionPerformed
+        int tiempo = Integer.valueOf(this.txtTiempoTodo.getText());
+        hcT = new HiloTodo(tiempo);
+        hcT.start();
+    }//GEN-LAST:event_btnInTodoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -297,20 +371,20 @@ public class Hilo extends javax.swing.JFrame {
         imgsIco[3] = img4; // sandia
 
         col1A.setIcon(imgsIco[0]);
-        col2A.setIcon(imgsIco[2]);
-        col3A.setIcon(imgsIco[1]);
+        col2A.setIcon(imgsIco[0]);
+        col3A.setIcon(imgsIco[0]);
 
         col1B.setIcon(imgsIco[2]);
-        col2B.setIcon(imgsIco[1]);
-        col3B.setIcon(imgsIco[0]);
+        col2B.setIcon(imgsIco[2]);
+        col3B.setIcon(imgsIco[2]);
 
         col1C.setIcon(imgsIco[3]);
-        col2C.setIcon(imgsIco[0]);
-        col3C.setIcon(imgsIco[2]);
+        col2C.setIcon(imgsIco[3]);
+        col3C.setIcon(imgsIco[3]);
 
         col1D.setIcon(imgsIco[1]);
-        col2D.setIcon(imgsIco[3]);
-        col3D.setIcon(imgsIco[3]);
+        col2D.setIcon(imgsIco[1]);
+        col3D.setIcon(imgsIco[1]);
 
         tm.addRow(new Object[]{col1A, col2A, col3A});
         tm.addRow(new Object[]{col1B, col2B, col3B});
@@ -320,6 +394,7 @@ public class Hilo extends javax.swing.JFrame {
         this.jTable1.setRowHeight(55);
 
     }
+//--------------------------------------------------------------------------
 
     public class HiloC1 extends Thread {
 
@@ -339,8 +414,43 @@ public class Hilo extends javax.swing.JFrame {
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Hilo.class.getName()).log(Level.SEVERE, null, ex);
                 }
-               // System.out.println("Tiempo: " + tiempo);
+                // System.out.println("Tiempo: " + tiempo);
                 actualizarC1(col1A, col1B, col1C, col1D, p);
+                p++;
+                if (p == 4) {
+                    p = 0;
+                }
+
+            }
+        }
+
+        public void setGirar(boolean girar) {
+            this.girar = girar;
+        }
+
+    }
+
+    //--------------------------------------------------------------------------
+    public class HiloC2 extends Thread {
+
+        private int tiempo;
+        private int p = 0; //posicion
+        private boolean girar = true;
+
+        public HiloC2(int tiempo) {
+            this.tiempo = tiempo;
+        }
+
+        @Override
+        public void run() {
+            while (girar) {
+                try {
+                    Thread.sleep(tiempo);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Hilo.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                // System.out.println("Tiempo: " + tiempo);
+                actualizarC1(col2A, col2B, col2C, col2D, p);
                 p++;
                 if (p == 4) {
                     p = 0;
@@ -356,6 +466,81 @@ public class Hilo extends javax.swing.JFrame {
 
     }
 
+    //--------------------------------------------------------------------------
+    public class HiloC3 extends Thread {
+
+        private int tiempo;
+        private int p = 0; //posicion
+        private boolean girar = true;
+
+        public HiloC3(int tiempo) {
+            this.tiempo = tiempo;
+        }
+
+        @Override
+        public void run() {
+            while (girar) {
+                try {
+                    Thread.sleep(tiempo);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Hilo.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                // System.out.println("Tiempo: " + tiempo);
+                actualizarC1(col3A, col3B, col3C, col3D, p);
+                p++;
+                if (p == 4) {
+                    p = 0;
+                }
+
+            }
+
+        }
+
+        public void setGirar(boolean girar) {
+            this.girar = girar;
+        }
+
+    }
+//---------------------------------------------------------------------------------
+
+    public class HiloTodo extends Thread {
+
+        private int tiempo;
+        private int p = 0; //posicion
+        private boolean girar = true;
+
+        public HiloTodo(int tiempo) {
+            this.tiempo = tiempo;
+        }
+
+        @Override
+        public void run() {
+            while (girar) {
+                try {
+                    Thread.sleep(tiempo);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Hilo.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                // System.out.println("Tiempo: " + tiempo);
+                actualizarC1(col3A, col3B, col3C, col3D, p);
+                actualizarC1(col2A, col2B, col2C, col2D, p);
+                actualizarC1(col1A, col1B, col1C, col1D, p);
+                p++;
+                if (p == 4) {
+                    p = 0;
+                }
+
+            }
+
+        }
+
+        public void setGirar(boolean girar) {
+            this.girar = girar;
+        }
+
+    }
+//---------------------------------------------------------------------------------
+
     public void actualizarC1(JLabel lbA, JLabel lbB, JLabel lbC, JLabel lbD, int p) {
         switch (p) {
             case 0:
@@ -365,13 +550,13 @@ public class Hilo extends javax.swing.JFrame {
                 lbD.setIcon(imgsIco[p + 1]);
                 break;
             case 1:
-                lbA.setIcon(imgsIco[p ]);
-                lbB.setIcon(imgsIco[p -1]);
+                lbA.setIcon(imgsIco[p]);
+                lbB.setIcon(imgsIco[p - 1]);
                 lbC.setIcon(imgsIco[p + 1]);
                 lbD.setIcon(imgsIco[p + 2]);
                 break;
             case 2:
-                lbA.setIcon(imgsIco[p+1]);
+                lbA.setIcon(imgsIco[p + 1]);
                 lbB.setIcon(imgsIco[p - 1]);
                 lbC.setIcon(imgsIco[p - 2]);
                 lbD.setIcon(imgsIco[p]);
@@ -380,13 +565,14 @@ public class Hilo extends javax.swing.JFrame {
                 lbA.setIcon(imgsIco[p - 1]);
                 lbB.setIcon(imgsIco[p]);
                 lbC.setIcon(imgsIco[p - 2]);
-                lbD.setIcon(imgsIco[p -3 ]);
+                lbD.setIcon(imgsIco[p - 3]);
                 break;
 
         }
         this.repaint();
     }
 
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIn1;
